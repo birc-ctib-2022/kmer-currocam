@@ -7,10 +7,14 @@ def kmer(x: str, k: int) -> list[str]:
 
     >>> kmer('agtagtcg', 3)
     ['agt', 'gta', 'tag', 'agt', 'gtc', 'tcg']
-
-    FIXME: do you want more tests here?
     """
-    ...
+    size = len(x) -k +1
+    kmers = [None] * size
+    i = 0
+    for j in range(len(x) - k + 1):
+        kmers[i] = x[j:j + k]
+        i += 1
+    return kmers
 
 
 def unique_kmers(x: str, k: int) -> list[str]:
