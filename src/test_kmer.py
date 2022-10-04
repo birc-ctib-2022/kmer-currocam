@@ -2,7 +2,7 @@
 # all files that start with test_*.py and run all functions with
 # names that start with test_
 
-from kmer import kmer, unique_kmers
+from kmer import count_kmers, kmer, unique_kmers
 
 
 def test_kmer_computes_all_kmers():
@@ -25,3 +25,21 @@ def test_unique_kmers_works_with_unique_kmers():
     """Given a non empty string with non unique kmers, it returns all unique kmers"""
     string = 'ATTC'
     assert unique_kmers(string, 2) == ['AT', 'TT', 'TC']
+
+def test_unique_kmers_return_empty_list():
+    """Given a non empty string with non unique kmers, it returns all unique kmers"""
+    assert unique_kmers('', 3) == []
+    assert unique_kmers('AA', 3) == []
+
+def test_count_kmers_works_with_unique_kmers():
+    """Given a non empty string with non unique kmers, it returns all unique kmers"""
+    assert count_kmers('ATTC', 2) == {'AT': 1, 'TT': 1, 'TC': 1}
+
+def test_count_kmers_works_with_non_unique_kmers():
+    """Given a non empty string with non unique kmers, it returns all unique kmers"""
+    assert count_kmers('ATTCAT', 2) == {'AT': 2, 'TT': 1, 'TC': 1, 'CA': 1}
+
+def test_unique_kmers_return_empty_dict():
+    """Given a non empty string with non unique kmers, it returns all unique kmers"""
+    assert count_kmers('AA', 3) == {}
+    assert count_kmers('AA', 3) == {}
