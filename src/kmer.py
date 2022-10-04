@@ -6,7 +6,8 @@ from typing import Iterator
 
 def string_into_kmer_iter(x: str, k: int) -> Iterator[str]:
     for j in range(len(x) - k + 1):
-        yield x[j:j + k]
+        yield x[j : j + k]
+
 
 def kmer(x: str, k: int) -> list[str]:
     """
@@ -35,7 +36,19 @@ def count_kmers(x: str, k: int) -> dict[str, int]:
     >>> count_kmers('AAAT', 3)
     {'AA': 2, 'AT': 1}
     """
-    counter = Counter() 
+    counter = Counter()
     for kmer in string_into_kmer_iter(x, k):
         counter.update((kmer,))
     return counter
+
+
+def count_kmers_sorted(x: str, k: int) -> list[(str, int)]:
+    """
+    Computer all k-mers of x and count how often they appear. It returns a sorted list of tuples.
+
+    >>> count_kmers_sorted('AAATTT', 2)
+    [('AA', 2), ('TT', 2), ('AT', 1)]
+
+    """
+    d = count_kmers(x, k)
+    return sorted(d.items(), key=lambda x: x[1], reverse=True)
