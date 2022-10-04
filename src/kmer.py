@@ -34,7 +34,7 @@ def count_kmers(x: str, k: int) -> dict[str, int]:
     Computer all k-mers of x and count how often they appear.
 
     >>> count_kmers('AAAT', 3)
-    {'AA': 2, 'AT': 1}
+    Counter({'AAA': 1, 'AAT': 1})
     """
     counter = Counter()
     for kmer in string_into_kmer_iter(x, k):
