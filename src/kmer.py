@@ -21,9 +21,8 @@ def unique_kmers(x: str, k: int) -> list[str]:
     """
     Computer all unique k-mers of x.
 
-    FIXME: do you want more tests here?
     """
-    ...
+    return list(dict.fromkeys(kmer(x, k)))
 
 
 def count_kmers(x: str, k: int) -> dict[str, int]:
