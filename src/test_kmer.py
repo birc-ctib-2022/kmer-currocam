@@ -2,7 +2,9 @@
 # all files that start with test_*.py and run all functions with
 # names that start with test_
 
-from kmer import count_kmers, count_kmers_sorted, kmer, unique_kmers
+import pytest
+
+from kmer import IllegalKValue, count_kmers, count_kmers_sorted, kmer, unique_kmers
 
 
 def test_kmer_computes_all_kmers():
@@ -35,6 +37,14 @@ def test_unique_kmers_return_empty_list():
     """Given a non empty string with non unique kmers, it returns all unique kmers"""
     assert unique_kmers("", 3) == []
     assert unique_kmers("AA", 3) == []
+
+
+def test_not_valid_k():
+    """Given a non empty string with non unique kmers, it returns all unique kmers"""
+    with pytest.raises(IllegalKValue):
+        unique_kmers("AA", 0)
+    with pytest.raises(IllegalKValue):
+        unique_kmers("AA", -2)
 
 
 def test_count_kmers_works_with_unique_kmers():

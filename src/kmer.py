@@ -3,8 +3,20 @@
 from collections import Counter
 from typing import Iterator
 
+class IllegalKValue(ValueError):
+    pass
 
 def string_into_kmer_iter(x: str, k: int) -> Iterator[str]:
+    """
+    Returns a generator of kmer strings from a string.
+    >>> kmers = string_into_kmer_iter('AGTC', 3)
+    >>> next(kmers)
+    'AGT'
+    >>> next(kmers)
+    'GTC'
+    """
+    if k <= 0:
+        raise IllegalKValue('You can not use k <= 0')
     for j in range(len(x) - k + 1):
         yield x[j : j + k]
 
